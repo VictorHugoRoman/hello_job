@@ -1,17 +1,14 @@
-version: 2.1                                                 #This is the circleci platform version
-                                  
-jobs:                                                        #This is how jobs are defined
-  hello-job:
-    docker:                         # This specifies Docker as the execution environment for our job (hello-job).
-      - image: cimg/node:lts          # This is the primary container in which your job's commands are run.
-        auth:
-          username: mydockerhub-user                      # This line is Docker credentials for authenticated pulls.
-          password: $DOCKERHUB_PASSWORD                   # They can be set as a context in the Organization Settings.
-    steps:
-      - checkout                                           # check out the code in the project directory
-      - run: echo "Hello World. I am the product of a successful build."      # run the `echo` command
+version: 2.1
 
-workflows:                                                 # Workflow defines a list of jobs and they run in the order which they are written.
-  sample-workflow:                                         # Name of workflow
+jobs:
+  hello-job:
+    docker:
+      - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
     jobs:
-      - hello-job                                          # Name of job run
+      - hello-job                                   # Name of job run
